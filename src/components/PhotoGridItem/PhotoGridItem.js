@@ -17,7 +17,8 @@ const PhotoGridItem = ({ id, src, alt, tags }) => {
 };
 
 const Picture = ({ src, alt }) => {
-  const srcNoExt = src.split(".").slice(0, -1);
+  const srcNoExt = src.split(".").slice(0, -1).join();
+  console.log({ srcNoExt });
   return (
     <picture>
       <source
@@ -56,8 +57,10 @@ const Image = styled.img`
 `;
 
 const Tags = styled.ul`
-  display: flex;
-  gap: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 4px 0;
 `;
 
 const Tag = styled.li`
@@ -66,10 +69,10 @@ const Tag = styled.li`
   font-size: 0.875rem;
   font-weight: 475;
   color: var(--color-gray-800);
-  display: -webkit-inline-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
+  display: inline;
+  &:not(:last-of-type) {
+    margin-right: 8px;
+  }
 `;
 
 export default PhotoGridItem;
