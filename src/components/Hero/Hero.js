@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
 
 const Hero = () => {
   return (
     <Wrapper>
-      <HeroImage src="/images/hero-img.jpg" />
-      <Swoop src="/swoop.svg" />
+      <HeroPicture src="/images/hero-img" />
+      <Swoop src="/swoop.svg" alt="" />
     </Wrapper>
   );
 };
@@ -19,6 +19,27 @@ const Wrapper = styled.section`
   align-items: flex-end;
   background: hsl(0deg 0% 1%);
 `;
+
+const HeroPicture = ({ src }) => (
+  <picture>
+    <source
+      type="image/avif"
+      srcSet={`
+    ${src}.avif 1x,
+    ${src}@2x.avif 2x,
+    ${src}@3x.avif 3x`}
+    />
+    <source
+      type="image/jpg"
+      srcSet={`
+    ${src}.jpg 1x,
+    ${src}@2x.jpg 2x,
+    ${src}@3x.jpg 3x`}
+    />
+
+    <HeroImage src={`${src}.jpg`} alt="Blue eyes cat looking at you" />
+  </picture>
+);
 
 const HeroImage = styled.img`
   display: block;
